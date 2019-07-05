@@ -28,7 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.gameDirectoryChooser = new System.Windows.Forms.FolderBrowserDialog();
             this.SuspendLayout();
+            // 
+            // gameDirectoryChooser
+            // 
+            this.gameDirectoryChooser.ShowNewFolderButton = false;
             // 
             // MainForm
             // 
@@ -37,11 +42,14 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "MainForm";
             this.Text = "Osu! Music Player";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.FolderBrowserDialog gameDirectoryChooser;
     }
 }
 
