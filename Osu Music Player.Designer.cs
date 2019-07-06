@@ -130,6 +130,7 @@
             // 
             // BackgroundImage
             // 
+            this.BackgroundImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.BackgroundImage.Location = new System.Drawing.Point(9, 96);
             this.BackgroundImage.Name = "BackgroundImage";
             this.BackgroundImage.Size = new System.Drawing.Size(397, 275);
