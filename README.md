@@ -6,13 +6,13 @@ This is a work in progress music player for all of your songs/beatmaps in osu!
 - Shuffle Play
 - Ability to change volume in-app
 - Displays title, artist and background image from beatmap while listening
-
+- Saving osu location in program.
 ### Planned Features:
 - Rewind
 - Playlist editing
 - Excluding songs from shuffle play
 - Playlist exporter (to listen in your favourite music program)
-- Saving osu location in program.
+
 - and more...
 
 ### Bugs/Precautions
