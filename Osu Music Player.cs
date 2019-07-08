@@ -18,6 +18,7 @@ namespace OsuMusicPlayer
         private song currentSong;
         private bool songPlaying = false;
         private Random random;
+        private bool changeFolder;
 
         public MainForm()
         {
@@ -27,19 +28,50 @@ namespace OsuMusicPlayer
         private void MainForm_Shown(object sender, EventArgs e)
         {
             gameDirectoryChooser.Description = "Select your osu! game folder...";
-            DialogResult result = gameDirectoryChooser.ShowDialog();
-            if (result == DialogResult.OK)
+
+            if (Properties.Settings.Default["gamePath"].ToString() == "" || changeFolder == true)
             {
-                beatmapScanner = new SongSorter(gameDirectoryChooser.SelectedPath);
-                musicPlayer = new Player();
-                musicPlayer.UpdateParent(this);
-                random = new Random();
-                LocationLabel.Text = String.Format("Will scan songs at: {0}", gameDirectoryChooser.SelectedPath);
+                DialogResult result = gameDirectoryChooser.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    changeFolder = false;
+                    Setup(gameDirectoryChooser.SelectedPath);
+                    Properties.Settings.Default["gamePath"] = gameDirectoryChooser.SelectedPath;
+                }
+                else
+                {
+                    Application.Exit();
+                }
             }
             else
             {
-                Application.Exit();
+                Setup(Properties.Settings.Default["gamePath"].ToString());
             }
+            
+        }
+
+        private void Setup(string directory)
+        {
+            if (beatmapScanner != null)
+            {
+                beatmapScanner = null;
+            }
+            beatmapScanner = new SongSorter(directory);
+            if (beatmapScanner.gameDirExists())
+            {
+                musicPlayer = new Player();
+                musicPlayer.UpdateParent(this);
+                random = new Random();
+                LocationLabel.Text = String.Format("Will scan songs at: {0}", directory);
+                CurrentDirLabel.Text = String.Format("Current selected directory: {0}", directory);
+            }
+            else
+            {
+                MessageBox.Show("You didn't select an osu! game folder!\nPlease try again", "osu! not found!", MessageBoxButtons.OK);
+                changeFolder = true;
+                MainForm_Shown(this, EventArgs.Empty);
+            }
+            
         }
 
         private void MainForm_Closing(object sender, EventArgs e)
@@ -47,6 +79,7 @@ namespace OsuMusicPlayer
             if (musicPlayer != null)
             {
                 musicPlayer.StopSong();
+                Properties.Settings.Default.Save();
             }
         }
 
@@ -89,6 +122,12 @@ namespace OsuMusicPlayer
             NowPlayingText.Text = String.Format("Now Playing: {0} - {1}", currentSong.artist, currentSong.title);
             BackgroundImage.ImageLocation = currentSong.bgArt;
             musicPlayer.NextSong(currentSong);
+        }
+
+        private void ChangeDirButton_Click(object sender, EventArgs e)
+        {
+            changeFolder = true;
+            MainForm_Shown(this, EventArgs.Empty);
         }
 
         private void volumeSlider_VolumeChanged(object sender, EventArgs e)

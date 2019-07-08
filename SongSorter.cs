@@ -22,6 +22,11 @@ namespace OsuMusicPlayer
             tempSongList = new List<string>();
         }
 
+        public bool gameDirExists()
+        {
+            return Directory.Exists(String.Concat(gameFolder, "\\Songs"));
+        }
+
         public List<song> ScanSongs()
         {
             StreamReader reader;

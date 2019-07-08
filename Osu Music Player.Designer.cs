@@ -42,12 +42,15 @@
             this.PlayPauseButton = new System.Windows.Forms.PictureBox();
             this.ExportPage = new System.Windows.Forms.TabPage();
             this.OptionsPage = new System.Windows.Forms.TabPage();
+            this.ChangeDirButton = new System.Windows.Forms.Button();
+            this.CurrentDirLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.ScanPage.SuspendLayout();
             this.PlayPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BackgroundImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FastForwardButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayPauseButton)).BeginInit();
+            this.OptionsPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // gameDirectoryChooser
@@ -191,12 +194,31 @@
             // 
             // OptionsPage
             // 
+            this.OptionsPage.Controls.Add(this.ChangeDirButton);
+            this.OptionsPage.Controls.Add(this.CurrentDirLabel);
             this.OptionsPage.Location = new System.Drawing.Point(4, 22);
             this.OptionsPage.Name = "OptionsPage";
             this.OptionsPage.Size = new System.Drawing.Size(412, 546);
             this.OptionsPage.TabIndex = 3;
             this.OptionsPage.Text = "Options";
             this.OptionsPage.UseVisualStyleBackColor = true;
+            // 
+            // ChangeDirButton
+            // 
+            this.ChangeDirButton.Location = new System.Drawing.Point(328, 10);
+            this.ChangeDirButton.Name = "ChangeDirButton";
+            this.ChangeDirButton.Size = new System.Drawing.Size(75, 23);
+            this.ChangeDirButton.TabIndex = 1;
+            this.ChangeDirButton.Text = "Change...";
+            this.ChangeDirButton.UseVisualStyleBackColor = true;
+            this.ChangeDirButton.Click += new System.EventHandler(this.ChangeDirButton_Click);
+            // 
+            // CurrentDirLabel
+            // 
+            this.CurrentDirLabel.Location = new System.Drawing.Point(8, 10);
+            this.CurrentDirLabel.Name = "CurrentDirLabel";
+            this.CurrentDirLabel.Size = new System.Drawing.Size(295, 39);
+            this.CurrentDirLabel.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -214,6 +236,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.BackgroundImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FastForwardButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayPauseButton)).EndInit();
+            this.OptionsPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -239,6 +262,8 @@
         private NAudio.Gui.VolumeSlider volumeSlider;
         private System.Windows.Forms.Label NowPlayingText;
         private System.Windows.Forms.PictureBox BackgroundImage;
+        private System.Windows.Forms.Button ChangeDirButton;
+        private System.Windows.Forms.Label CurrentDirLabel;
     }
 }
 
